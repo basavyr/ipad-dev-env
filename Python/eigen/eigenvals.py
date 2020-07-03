@@ -49,10 +49,18 @@ def ComputeMatrix(n):
     for v in M_vecs:
         print(np.round(v))
 
+matrix_vec = [[1,2,3],[0,1,1],[2,2,2]]
 
-ComputeMatrix(3)
-ComputeMatrix(4)
+values, vectors=LA.eig(matrix_vec)
 
-matrix_vec = [[1, 1, 1, 1], [-4, 0, 0, 1], [-3, 0, 1, 0], [-2, 1, 0, 0]]
+# This is implemented using the _geev LAPACK routines which compute the eigenvalues and eigenvectors of general square arrays.
 
-print(matrix_vec)
+# The number w is an eigenvalue of a if there exists a vector v such that a @ v = w \* v. Thus, the arrays a, w, and v satisfy the equations a @ v[:,i] = w[i] \* v[:,i] for :math:i \in \{0,...,M-1\}.
+
+# The array v of eigenvectors may not be of maximum rank, that is, some of the columns may be linearly dependent, although round-off error may obscure that fact. If the eigenvalues are all different, then theoretically the eigenvectors are linearly independent and a can be diagonalized by a similarity transformation using v, i.e, inv(v) @ a @ v is diagonal.
+
+print(values)
+
+count =1
+for x in vectors:
+    print(f'The vector x_{count}: {x}')
