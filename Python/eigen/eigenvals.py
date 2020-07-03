@@ -101,15 +101,18 @@ def CreateLambdaMatrix(n, lambdas):
 def CheckEigenEquation(m, l, v):
     if(len(m) != len(l)):
         return 'Invalid matrix: can\'t solve the system'
-    lhs=0
-    rhs=0
+    
+    lhs = 0
+    rhs = 0
     for id in range(len(m)):
         x_id = v[:, id]
         lhs = np.matmul(m, x_id)
         rhs = l[id]*x_id
     for elem in range(len(lhs)):
-        if(lhs[elem] == rhs[elem]):
-            print(f'The equation no.{id} is VALID')
+        a1=round(lhs[elem],4)
+        a2=round(rhs[elem],4)
+        if(a1==a2):
+            print(f'The equation no.{elem+1} is VALID')
         else:
             print(f'Not valid')
 
