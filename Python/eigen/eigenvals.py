@@ -49,18 +49,67 @@ def ComputeMatrix(n):
     for v in M_vecs:
         print(np.round(v))
 
-matrix_vec = [[1,2,3],[0,1,1],[2,2,2]]
 
-values, vectors=LA.eig(matrix_vec)
+def IdentityMatrix(n):
+    m = []
+    for column in range(n):
+        line = []
+        for row in range(n):
+            if(row == column):
+                x = 1
+                line.append(1)
+            else:
+                line.append(0)
+        m.append(line)
+    return m
+
+id3=IdentityMatrix(3)
+
+matrix_vec = [[1, 2, 3], [0, 1, 1], [2, 2, 2]]
+
+values, vectors = LA.eig(matrix_vec)
+
+count = 1
+for value in values:
+    # print(f'l[{count}]={value}')
+    # print(f'Its corresponding vector is: v[{count}]={vectors[:,count-1]}')
+    count = count+1
+
+def CreateLambdaMatrix(n,lambdas):
+    if(n!=len(lambdas)):
+        return 'Error: the matrix is invalid'
+    count=0
+    m=[]
+    for column in range(n):
+        line=[]
+        for row in range(n):
+            if(row==column):
+                line.append(lambdas[count])
+                count=count+1
+            else:
+                line.append(0)
+        m.append(line)
+    return m
+
+lambdas=CreateLambdaMatrix(3,values)
+lhs=np.matmul(lambdas,np.transpose(vectors))
+print(lhs)
+rhs=np.matmul(matrix_vec,np.transpose(vectors))
+print(rhs)
 
 # This is implemented using the _geev LAPACK routines which compute the eigenvalues and eigenvectors of general square arrays.
 
 # The number w is an eigenvalue of a if there exists a vector v such that a @ v = w \* v. Thus, the arrays a, w, and v satisfy the equations a @ v[:,i] = w[i] \* v[:,i] for :math:i \in \{0,...,M-1\}.
 
-# The array v of eigenvectors may not be of maximum rank, that is, some of the columns may be linearly dependent, although round-off error may obscure that fact. If the eigenvalues are all different, then theoretically the eigenvectors are linearly independent and a can be diagonalized by a similarity transformation using v, i.e, inv(v) @ a @ v is diagonal.
+# v  : (..., M, M) array
+# The normalized (unit "length") eigenvectors, such that the  column `v[:,i]` is the eigenvector corresponding to the  eigenvalue `w[i]`
 
-print(values)
+# print(values)
 
-count =1
-for x in vectors:
-    print(f'The vector x_{count}: {x}')
+count = 1
+for id in range(len(vectors)):
+    # print(f'The vector x_{count}: {vectors[id,0]}')
+    count = count+1
+
+
+# print(vectors)
