@@ -93,6 +93,29 @@ def CreateLambdaMatrix(n, lambdas):
         m.append(line)
     return m
 
+# check if the eigenvalues are comouted correctly
+# l is the list of eigenvalues
+# v is the list with the eigenvectors of m
+
+
+def CheckEigenEquation(m, l, v):
+    if(len(m) != len(l)):
+        return 'Invalid matrix: can\'t solve the system'
+    lhs=0
+    rhs=0
+    for id in range(len(m)):
+        x_id = v[:, id]
+        lhs = np.matmul(m, x_id)
+        rhs = l[id]*x_id
+    for elem in range(len(lhs)):
+        if(lhs[elem] == rhs[elem]):
+            print(f'The equation no.{id} is VALID')
+        else:
+            print(f'Not valid')
+
+
+CheckEigenEquation(matrix_vec, values, vectors)
+
 
 lambdas = CreateLambdaMatrix(3, values)
 lhs = np.matmul(lambdas, np.transpose(vectors))
@@ -100,13 +123,13 @@ lhs = np.matmul(lambdas, np.transpose(vectors))
 rhs = np.matmul(matrix_vec, np.transpose(vectors))
 # print(rhs)
 
-x0=vectors[:,0]
+x0 = vectors[:, 0]
 
-product=np.matmul(matrix_vec,x0)
-print(product)
+lhs = np.matmul(matrix_vec, x0)
+# print(lhs)
 
-rhs=values[0]*vectors[:,0]
-print(rhs)
+rhs = values[0]*vectors[:, 0]
+# print(rhs)
 # This is implemented using the _geev LAPACK routines which compute the eigenvalues and eigenvectors of general square arrays.
 
 # The number w is an eigenvalue of a if there exists a vector v such that a @ v = w \* v. Thus, the arrays a, w, and v satisfy the equations a @ v[:,i] = w[i] \* v[:,i] for :math:i \in \{0,...,M-1\}.
