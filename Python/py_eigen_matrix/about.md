@@ -1,4 +1,4 @@
-#Study the eigenvectors given by `Linalg` implementation of `numpy`
+# Study the eigenvectors given by `Linalg` implementation of `numpy`
 
 This script studies the behavior of the results returned by the `eig` implementation found in `linalg` submodule from `numpy`.
 
