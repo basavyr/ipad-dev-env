@@ -31,3 +31,4 @@ v1T = np.transpose(v1)
 norm = ComputeNorm(v1)
 v1Normed = v1/norm
 print(v1, v1Normed)
+InnerProduct(v1)
