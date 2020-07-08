@@ -10,7 +10,8 @@ def InnerProduct(v1):
     for id in range(len(v1)):
         t = v1[id]*v1T[id]
         sum = sum+t
-    print(f'<v|v>={np.sqrt(sum)}')
+    # print(f'<v|v>={np.sqrt(sum)}')
+    return np.sqrt(sum)
 
 
 def ComputeNorm(v1):
@@ -30,5 +31,13 @@ v1T = np.transpose(v1)
 
 norm = ComputeNorm(v1)
 v1Normed = v1/norm
-print(v1, v1Normed)
-InnerProduct(v1)
+# print(v1, v1Normed)
+# InnerProduct(v1)
+# InnerProduct(v1Normed)
+
+print(f'The original vector v={v1}')
+print(f'<v|v>={InnerProduct(v1)}')
+print(f'The normalized vector v\'={v1Normed}')
+print(f'<v\'|v\'>={InnerProduct(v1Normed)}')
+# print(f'The norm of v is={norm}')
+

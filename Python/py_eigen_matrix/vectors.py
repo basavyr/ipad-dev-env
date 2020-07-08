@@ -25,5 +25,41 @@ def SymbMatrix(n):
 
 m1=Matrix(3)
 m1_symb=SymbMatrix(3)
-for id in range(len(m1_symb)):
-    print(m1_symb[id])
+# for id in range(len(m1_symb)):
+    # print(m1_symb[id])
+
+m1sT=np.transpose(m1_symb)
+# print(m1sT)
+
+values, vectors=LA.eig(m1)
+
+lambdas=[]
+for value in values:
+    # print(round(value,2))
+    lambdas.append(round(value,2))
+
+# print(lambdas)
+print('Eigenvectors')
+# print(vectors)
+
+def ComputeNorm(v):
+    n=len(v)
+    sumt=0
+    for id in range(n):
+        t0=v[id]
+        t0_star=np.conj(t0)
+        t=t0*t0_star
+        sumt=sumt+t
+    return np.sqrt(sumt)
+
+# v=[1,1,1]
+# vN=v/ComputeNorm(v)
+
+for id in range(len(vectors)):
+    p1_row=vectors[id]
+    p1_col=vectors[:,id]
+    print('row',p1_row,ComputeNorm(p1_row))
+    print('col',p1_col,ComputeNorm(p1_col))
+
+print(f'Eigenvectors')
+print(vectors)
