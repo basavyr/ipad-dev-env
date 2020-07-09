@@ -40,4 +40,5 @@ print(f'<v|v>={InnerProduct(v1)}')
 print(f'The normalized vector v\'={v1Normed}')
 print(f'<v\'|v\'>={InnerProduct(v1Normed)}')
 # print(f'The norm of v is={norm}')
-
+print(f'{norm}')
+print(f'{norm}')
